@@ -1,45 +1,39 @@
 #include "decoration.h"
 
-DecorationObject::DecorationObject()
-{
-model=NULL;
-sprite=NULL;
-rot=0;
-sca=1;
-light = false;
-blend = false;
-depthmask = true;
-colormaterial = false;
-blend_function = GL_ONE;
-color[0]=1.0;
-color[1]=1.0;
-color[2]=1.0;
-color[3]=1.0;
+DecorationObject::DecorationObject() {
+	model = NULL;
+	sprite = NULL;
+	rot = 0;
+	sca = 1;
+	light = false;
+	blend = false;
+	depthmask = true;
+	colormaterial = false;
+	blend_function = GL_ONE;
+	color[0] = 1.0;
+	color[1] = 1.0;
+	color[2] = 1.0;
+	color[3] = 1.0;
 }
 
-void DecorationObject::SetModel(Model *in_model)
-{
-model = in_model;
+void DecorationObject::SetModel(Model *in_model) {
+	model = in_model;
 }
 
-void DecorationObject::SetSprite(Sprite *in_sprite)
-{
-sprite = in_sprite;
+void DecorationObject::SetSprite(Sprite *in_sprite) {
+	sprite = in_sprite;
 }
 
-void DecorationObject::SetCord(vec3 in_cord)
-{
-cord = in_cord;
+void DecorationObject::SetCord(vec3 in_cord) {
+	cord = in_cord;
 }
 
-void DecorationObject::SetRot(float in_rot)
-{
-rot = in_rot;
+void DecorationObject::SetRot(float in_rot) {
+	rot = in_rot;
 }
 
-void DecorationObject::SetSca(float in_sca)
-{
-sca = in_sca;
+void DecorationObject::SetSca(float in_sca) {
+	sca = in_sca;
 }
 
 void DecorationObject::SetColor(vec4 in_color)

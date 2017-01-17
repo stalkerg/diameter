@@ -68,7 +68,7 @@ direction.y *= -1;
 direction.x *= -1;
 }
 
-void PlayFizState::RotLeft()
+void PlayFizState::RotLeft(void)
 {
 to_rotation += (*reltime) * speed_rotation;
 if (to_rotation > 360)

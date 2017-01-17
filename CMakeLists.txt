@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
 
 project(Diameter)
 
 set(Python_ADDITIONAL_VERSIONS "2.7")
-find_package(PythonLibs REQUIRED)
 
+find_package(PythonLibs REQUIRED)
 find_package(SDL REQUIRED)
 find_package(SDL_mixer REQUIRED)
 find_package(SDL_image REQUIRED)
@@ -69,7 +69,7 @@ add_executable(diameter
 )
 
 target_compile_definitions(diameter PRIVATE -DPKGDATADIR="${CMAKE_INSTALL_PREFIX}/share/gamediameter/")
-
+target_compile_features(diameter PRIVATE cxx_range_for)
 
 target_link_libraries(diameter
 	${SDL_LIBRARY}
@@ -82,3 +82,9 @@ target_link_libraries(diameter
 	${GUICHAN_SDL_LIBRARY}
 	${GUICHAN_OPENGL_LIBRARY}
 )
+
+install(TARGETS diameter
+		RUNTIME DESTINATION bin)
+
+install(DIRECTORY data/
+		DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gamediameter")

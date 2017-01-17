@@ -106,278 +106,264 @@ GLfloat mat_diffuse[]= { 0.2f, 0.2f, 0.2f, 1.0f };
 GLfloat mat_specular[]= { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat mat_shininess[]= { 1.0f };
 
-void Render() 
-{
-//Fizic	
-if(Game)
-	{
-	while(time_gone>=ITfiz)
-		{
-		PySublimatObjects::SetPythonSublimatObjects(World1->GetSub(nWorld));
-		if (World1->GetSub(nWorld)->GetPyNextTime()<SDL_GetTicks())
-			{
-			World1->GetSub(nWorld)->SetPyNextTime(SDL_GetTicks()+2000);
-			World1->GetSub(nWorld)->RunPython();
+void Render() {
+	//Fizic	
+	if(Game) {
+		while(time_gone>=ITfiz) {
+			PySublimatObjects::SetPythonSublimatObjects(World1->GetSub(nWorld));
+			if (World1->GetSub(nWorld)->GetPyNextTime()<SDL_GetTicks()) {
+				World1->GetSub(nWorld)->SetPyNextTime(SDL_GetTicks()+2000);
+				World1->GetSub(nWorld)->RunPython();
 			}
-		Colizion(World1->GetSub(nWorld),*World1->GetSub(nWorld)->GetSO());
-		for(object_iterator_1=World1->GetSub(nWorld)->GetSO()->begin();
-		    object_iterator_1!=World1->GetSub(nWorld)->GetSO()->end();
-		    ++object_iterator_1)
-			{
-			object_iterator_2=object_iterator_1;
-			--object_iterator_2;
-			if(object_iterator_1->in->Calc()==1)
-				object_iterator_1=object_iterator_2;
-			}
-		time_gone-=ITfiz;
+			Colizion(World1->GetSub(nWorld),*World1->GetSub(nWorld)->GetSO());
+			for(object_iterator_1=World1->GetSub(nWorld)->GetSO()->begin();
+			    object_iterator_1!=World1->GetSub(nWorld)->GetSO()->end();
+			    ++object_iterator_1)
+				{
+				object_iterator_2=object_iterator_1;
+				--object_iterator_2;
+				if(object_iterator_1->in->Calc()==1)
+					object_iterator_1=object_iterator_2;
+				}
+			time_gone-=ITfiz;
+			ticklast2=ticknow2;
+			ticknow2=SDL_GetTicks();
+			time_gone+=(ticknow2-ticklast2)/1000.0;
+		}
+	} else {
 		ticklast2=ticknow2;
 		ticknow2=SDL_GetTicks();
-		time_gone+=(ticknow2-ticklast2)/1000.0;
-		}
 	}
-else
-	{
-	ticklast2=ticknow2;
-	ticknow2=SDL_GetTicks();
-	}
-//Draw
-glClearColor(0,0,0,0);
-glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-glMatrixMode(GL_PROJECTION);
-glLoadIdentity();
+	//Draw
+	glClearColor(0,0,0,0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 
-glColor3f(1.0,1.0,1.0);
-glEnable(GL_POINT_SMOOTH);
-glEnable (GL_BLEND);
-glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-glEnable(GL_ALPHA_TEST);
-glAlphaFunc(GL_GREATER, 0);
-glEnable(GL_DEPTH_TEST);
-//int bbb;
-//for(bbb=0;bbb<25000000;bbb++)
-//{}
-// 3D Zone___start____________
-glMatrixMode(GL_PROJECTION);
-glLoadIdentity();
-gluPerspective (60, (float)option.winW / option.winH, 0.1, 10000);
-//Lights initialization and activation
-glLightfv (GL_LIGHT0, GL_AMBIENT, light_ambient);
-glLightfv (GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-glLightfv (GL_LIGHT0, GL_SPECULAR, light_specular);
-glLightfv (GL_LIGHT0, GL_POSITION, light_position);
-glLightfv (GL_LIGHT0, GL_SPOT_CUTOFF, light_spot_cut1);
-//glLightfv (GL_LIGHT0, GL_SPOT_DIRECTION, light_spot_dir1);
-glLightfv (GL_LIGHT0, GL_SPOT_DIRECTION, light_spot_exp1);
-glLightf (GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
-glLightf (GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.05);
-//glEnable (GL_LIGHT0);
-glLightfv (GL_LIGHT1, GL_AMBIENT, light_ambient1);
-glLightfv (GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
-glLightfv (GL_LIGHT1, GL_SPECULAR, light_specular);
-glLightfv (GL_LIGHT1, GL_POSITION, light_position1);
+	glColor3f(1.0,1.0,1.0);
+	glEnable(GL_POINT_SMOOTH);
+	glEnable (GL_BLEND);
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER, 0);
+	glEnable(GL_DEPTH_TEST);
 
-glEnable (GL_LIGHT1);
-//glShadeModel(GL_SMOOTH);
+	// 3D Zone___start____________
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective (60, (float)option.winW / option.winH, 0.1, 10000);
+	//Lights initialization and activation
+	glLightfv (GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv (GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv (GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv (GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv (GL_LIGHT0, GL_SPOT_CUTOFF, light_spot_cut1);
+	//glLightfv (GL_LIGHT0, GL_SPOT_DIRECTION, light_spot_dir1);
+	glLightfv (GL_LIGHT0, GL_SPOT_DIRECTION, light_spot_exp1);
+	glLightf (GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
+	glLightf (GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.05);
+	//glEnable (GL_LIGHT0);
+	glLightfv (GL_LIGHT1, GL_AMBIENT, light_ambient1);
+	glLightfv (GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
+	glLightfv (GL_LIGHT1, GL_SPECULAR, light_specular);
+	glLightfv (GL_LIGHT1, GL_POSITION, light_position1);
 
-glMatrixMode(GL_MODELVIEW);
-// 3D Zone___body____________
+	glEnable (GL_LIGHT1);
+	//glShadeModel(GL_SMOOTH);
 
-glEnable(GL_ALPHA_TEST);
-glEnable(GL_DEPTH_TEST);
-glDisable (GL_LIGHTING);
-glPushMatrix();
-	glRotatef(12,-1,0,0);
-	glTranslatef(-(*CamCor)->x,-(*CamCor)->y,-10+z);
+	glMatrixMode(GL_MODELVIEW);
+	// 3D Zone___body____________
+
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_DEPTH_TEST);
+	glDisable (GL_LIGHTING);
 	glPushMatrix();
-		glRotatef(fROT,0,0,1);
-		
-		/*glPushMatrix();
-			glColor4f(1.0,1.0,1.0,1.0);
-			glTranslatef(2,0,-30);
-			back->Draw(0,90);
-		glPopMatrix();
+		glRotatef(12,-1,0,0);
+		glTranslatef(-(*CamCor)->x,-(*CamCor)->y,-10+z);
 		glPushMatrix();
-			glColor4f(1.0,1.0,1.0,0.5);
-			glTranslatef(2,0,-12);
-			back->Draw(0,90);
-			glColor4f(1.0,1.0,1.0,1.0);
-		glPopMatrix();*/
-		for (decoraton_iterator=World1->GetSub(nWorld)->GetDecorationList()->begin();
-		     decoraton_iterator!=World1->GetSub(nWorld)->GetDecorationList()->end();
-		     ++decoraton_iterator)
-			decoraton_iterator->Draw();
-		
-		glDepthMask (GL_FALSE);
-		glEnable (GL_BLEND);
-		glEnable(GL_COLOR_MATERIAL);
-		glPushMatrix();
-			ss1.Draw();
+			glRotatef(fROT,0,0,1);
+			
+			/*glPushMatrix();
+				glColor4f(1.0,1.0,1.0,1.0);
+				glTranslatef(2,0,-30);
+				back->Draw(0,90);
+			glPopMatrix();
+			glPushMatrix();
+				glColor4f(1.0,1.0,1.0,0.5);
+				glTranslatef(2,0,-12);
+				back->Draw(0,90);
+				glColor4f(1.0,1.0,1.0,1.0);
+			glPopMatrix();*/
+			for (decoraton_iterator=World1->GetSub(nWorld)->GetDecorationList()->begin();
+			     decoraton_iterator!=World1->GetSub(nWorld)->GetDecorationList()->end();
+			     ++decoraton_iterator)
+				decoraton_iterator->Draw();
+			
+			glDepthMask (GL_FALSE);
+			glEnable (GL_BLEND);
+			glEnable(GL_COLOR_MATERIAL);
+			glPushMatrix();
+				ss1.Draw();
+			glPopMatrix();
+			glDepthMask (GL_TRUE);
 		glPopMatrix();
-		glDepthMask (GL_TRUE);
+		//testC.Draw();
 	glPopMatrix();
-	//testC.Draw();
-glPopMatrix();
-glDisable (GL_BLEND);
-glPushMatrix();
-	glTranslatef(0,0,z-18);
-	glRotatef(12,-1.0,0,0);
+	glDisable (GL_BLEND);
 	glPushMatrix();
-		glRotatef(fROT,0,0,1);
-		CamAI=(AI*)CamObject;
-		
-		glTranslatef(-(*CamCor)->x,-(*CamCor)->y,0);
+		glTranslatef(0,0,z-18);
+		glRotatef(12,-1.0,0,0);
+		glPushMatrix();
+			glRotatef(fROT,0,0,1);
+			CamAI=(AI*)CamObject;
+			
+			glTranslatef(-(*CamCor)->x,-(*CamCor)->y,0);
 			/*
 				1 2 3
 				4 5 6
 				7 8 9
 			*/
+				
+			ObjectList DrawList=GetViewObjectList(World1->GetSub(nWorld)->GetSeO(),CamAI->GetnSector(),
+			World1->GetSub(nWorld)->Get4Sector(World1->GetSub(nWorld)->GetSectorN(**CamCor),(*CamCor)->x,(*CamCor)->y),
+			World1->GetSub(nWorld)->GetlenghS(), World1->GetSub(nWorld)->GetnSectors());
+			glEnable (GL_LIGHTING);
 			
-		ObjectList DrawList=GetViewObjectList(World1->GetSub(nWorld)->GetSeO(),CamAI->GetnSector(),
-		World1->GetSub(nWorld)->Get4Sector(World1->GetSub(nWorld)->GetSectorN(**CamCor),(*CamCor)->x,(*CamCor)->y),
-		World1->GetSub(nWorld)->GetlenghS(), World1->GetSub(nWorld)->GetnSectors());
-		glEnable (GL_LIGHTING);
-		
-		for (object_iterator_1=DrawList.begin();
-		     object_iterator_1!=DrawList.end();
-		     ++object_iterator_1)
-			{
-			object_iterator_1->in->Draw();
-			}
-		glPopMatrix();
-glPopMatrix();
-glDisable (GL_LIGHTING);
+			for (object_iterator_1=DrawList.begin();
+			     object_iterator_1!=DrawList.end();
+			     ++object_iterator_1)
+				{
+				object_iterator_1->in->Draw();
+				}
+			glPopMatrix();
+	glPopMatrix();
+	glDisable (GL_LIGHTING);
 
-// 3D Zone___end____________
-glMatrixMode(GL_PROJECTION);
-glLoadIdentity();
-if (option.winW <= option.winH)
-	glOrtho (-10.0, 10.0, -10.0 * (GLfloat) option.winH / (GLfloat) option.winW,
-	          10.0 * (GLfloat) option.winH / (GLfloat) option.winW, -100.0, 100.0);
-else
-	glOrtho (-10.0 * (GLfloat) option.winW / (GLfloat) option.winH,
-	          10.0 * (GLfloat) option.winW / (GLfloat) option.winH,
-		 -10.0, 10.0, -100.0, 100.0);
+	// 3D Zone___end____________
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	if (option.winW <= option.winH)
+		glOrtho (-10.0, 10.0, -10.0 * (GLfloat) option.winH / (GLfloat) option.winW,
+		          10.0 * (GLfloat) option.winH / (GLfloat) option.winW, -100.0, 100.0);
+	else
+		glOrtho (-10.0 * (GLfloat) option.winW / (GLfloat) option.winH,
+		          10.0 * (GLfloat) option.winW / (GLfloat) option.winH,
+			 -10.0, 10.0, -100.0, 100.0);
 
-glMatrixMode(GL_MODELVIEW);
-// 2D Gra and UI
-DrawRadar(World1, PlayerObject, nWorld);
+	glMatrixMode(GL_MODELVIEW);
+	// 2D Gra and UI
+	DrawRadar(World1, PlayerObject, nWorld);
 
-MainGui.Draw();
+	MainGui.Draw();
 
-MainGui.SetFpsLabel(StringTemp);
-sprintf(StringTemp2, "x:%f y:%f r:%i", (*CamCor)->x, (*CamCor)->y, World1->GetSub(nWorld)->GetSectorN(**CamCor));
-MainGui.SetCordLabel(StringTemp2);
-if(PlayerObject!=NULL)
-	sprintf(StringTemp2,"+Health:%i #Shield:%i -GunEnergy:%i  ShipKill:%i  AttackShip:%i",(int)((AI*)PlayerObject)->GetParamsHS()->Health,(int)((AI*)PlayerObject)->GetParamsHS()->Shield,(int)((AI*)PlayerObject)->GetParamsHS()->GunEnergy,((AI*)PlayerObject)->GetFrag(),AttackShip-((AI*)PlayerObject)->GetFrag());
-MainGui.SetParamLabel(StringTemp2);
+	MainGui.SetFpsLabel(StringTemp);
+	sprintf(StringTemp2, "x:%f y:%f r:%i", (*CamCor)->x, (*CamCor)->y, World1->GetSub(nWorld)->GetSectorN(**CamCor));
+	MainGui.SetCordLabel(StringTemp2);
+	if(PlayerObject!=NULL)
+		sprintf(StringTemp2,
+				"+Health:%i #Shield:%i -GunEnergy:%i  ShipKill:%i  AttackShip:%i",
+				(int)((AI*)PlayerObject)->GetParamsHS()->Health,
+				(int)((AI*)PlayerObject)->GetParamsHS()->Shield,
+				(int)((AI*)PlayerObject)->GetParamsHS()->GunEnergy,
+				((AI*)PlayerObject)->GetFrag(),
+				AttackShip-((AI*)PlayerObject)->GetFrag()
+		);
+	MainGui.SetParamLabel(StringTemp2);
 
-glMatrixMode(GL_PROJECTION);
-glPushMatrix();
-glLoadIdentity();
-glOrtho(0.0, (double)option.winW, (double)option.winH, 0.0, -100.0, 100.0);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0, (double)option.winW, (double)option.winH, 0.0, -100.0, 100.0);
 
-/* Enable Blending */
-glEnable (GL_BLEND);
-/* Type Of Blending To Perform */
-glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-glDisable(GL_ALPHA_TEST);
-glColor4f(1,1,1,1.0);
-curs_center->Draw(curs_cord);
-glPushMatrix();
-glTranslatef(0,0,1);
-if(PlayerObject!=NULL)
-	{
-	float color_ring=((AI*) PlayerObject)->GetParamsHS()->GunEnergy/
-	((AI*) PlayerObject)->GetParamsHS()->MaxGunEnergy;
-	glColor4f(color_ring,color_ring,color_ring,1);
-	curs_ring->Draw(curs_cord,180);
+	/* Enable Blending */
+	glEnable (GL_BLEND);
+	/* Type Of Blending To Perform */
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDisable(GL_ALPHA_TEST);
+	glColor4f(1,1,1,1.0);
+	curs_center->Draw(curs_cord);
+	glPushMatrix();
+	glTranslatef(0,0,1);
+	if(PlayerObject!=NULL) {
+		float color_ring=((AI*) PlayerObject)->GetParamsHS()->GunEnergy/
+						 ((AI*) PlayerObject)->GetParamsHS()->MaxGunEnergy;
+		glColor4f(color_ring, color_ring,color_ring, 1);
+		curs_ring->Draw(curs_cord,180);
 	}
-glColor4f(1,1,1,1.0);
-glTranslatef(0,0,3);
-if(PlayerObject!=NULL)
-	{
-	switch(((AI*) PlayerObject)->GetTypeGun())
-		{
-		case 1:curs_wplasma->Draw(curs_cord,180);break;
-		case 2:curs_wliser->Draw(curs_cord,180);break;
-		case 3:curs_wrocket->Draw(curs_cord,180);break;
+	glColor4f(1, 1, 1, 1.0);
+	glTranslatef(0, 0, 3);
+	if(PlayerObject != NULL) {
+		switch(((AI*) PlayerObject)->GetTypeGun()) {
+			case 1: curs_wplasma->Draw(curs_cord,180); break;
+			case 2: curs_wliser->Draw(curs_cord,180); break;
+			case 3: curs_wrocket->Draw(curs_cord,180); break;
 		};
 	}
-glPopMatrix();
-glPopMatrix();
-SDL_GL_SwapBuffers();
+	glPopMatrix();
+	glPopMatrix();
+	SDL_GL_SwapBuffers();
 
-if(PlayerStart==false&&CalcSim&&PlayerObject!=NULL)
-	{
-	CalcSim=false;	
-	((AI*)PlayerObject)->AddObjectToSO(AddObject);
+	if(PlayerStart == false && CalcSim && PlayerObject != NULL) {
+		CalcSim = false;	
+		((AI*)PlayerObject)->AddObjectToSO(AddObject);
 	}
 
-ticklast=ticknow;
-ticknow=SDL_GetTicks();
-ticknow2=ticknow;
-reltime=(ticknow-ticklast)/1000.0;
-if(Game) time_gone+=reltime;
-bfps+=(ticknow-ticklast);
-fps++;
-if (bfps>1000)
-	{
-	bfps=0;
-	cout<<"FPS:"<<fps<<"\tObjects:"<<World1->GetSub(0)->GetSO()->size()<<endl;
-	sprintf (StringTemp, "FPS:%i", (int)fps);
-	fps=0;
-	if(TextureDelet.size()!=0)
-		{
-		for(IteratorUTL=TextureDelet.begin();
-		    IteratorUTL!=TextureDelet.end(); ++IteratorUTL)
-			(*IteratorUTL)->Unable();
-		TextureDelet.clear();
+	ticklast = ticknow;
+	ticknow = SDL_GetTicks();
+	ticknow2 = ticknow;
+	reltime = (ticknow - ticklast) / 1000.0;
+	if(Game) time_gone+=reltime;
+	bfps+=(ticknow-ticklast);
+	fps++;
+	if (bfps>1000) {
+		bfps=0;
+		cout<<"FPS:"<<fps<<"\tObjects:"<<World1->GetSub(0)->GetSO()->size()<<endl;
+		sprintf (StringTemp, "FPS:%i", (int)fps);
+		fps=0;
+		if(TextureDelet.size() != 0) {
+			for(IteratorUTL=TextureDelet.begin(); IteratorUTL != TextureDelet.end(); ++IteratorUTL)
+				(*IteratorUTL)->Unable();
+			TextureDelet.clear();
 		}
-	if(ModelDelet.size()!=0)
-		{
-		for(IteratorUML=ModelDelet.begin();
-		    IteratorUML!=ModelDelet.end(); ++IteratorUML)
-			(*IteratorUML)->Unable();
-		ModelDelet.clear();
+		if(ModelDelet.size()!=0) {
+			for(IteratorUML=ModelDelet.begin(); IteratorUML != ModelDelet.end(); ++IteratorUML)
+				(*IteratorUML)->Unable();
+			ModelDelet.clear();
 		}
 	}
 
-if(PlayerStart&&CalcSim)
-	{
-	cout<<"PlayerC"<<endl;
-	PlayerStart=false;
-	CalcSim=false;
-	World1->DeleteWorld();
-	delete World1;
-	World1=LoadWorld(MainGui.GetSFileWorld(),&gslist,&gmlist, &ticknow, &ITfiz, CamCor, &CamObject, &PlayerObject);
-	WorldInit(World1);
-	((GaoObject*)PlayerObject)->WriteWeaponSM(PSTemp);
-	*CamCor=((AI*)CamObject)->GetUCord();
-	ss1.playercord=((AI*)CamObject)->GetUCord();
-	CommonPF=((AI*)PlayerObject)->GetPFS();
-	cout<<"End"<<endl;
+	if(PlayerStart&&CalcSim) {
+		cout<<"PlayerC"<<endl;
+		PlayerStart=false;
+		CalcSim=false;
+		World1->DeleteWorld();
+		delete World1;
+		World1=LoadWorld(MainGui.GetSFileWorld(),&gslist,&gmlist, &ticknow, &ITfiz, CamCor, &CamObject, &PlayerObject);
+		WorldInit(World1);
+		((GaoObject*)PlayerObject)->WriteWeaponSM(PSTemp);
+		*CamCor=((AI*)CamObject)->GetUCord();
+		ss1.playercord=((AI*)CamObject)->GetUCord();
+		CommonPF=((AI*)PlayerObject)->GetPFS();
+		cout<<"End"<<endl;
 	}
 
-if(PlayerObject!=NULL&&((AI*)PlayerObject)->GetStepKill())
-        {
-	cout<<"You Die!!!"<<endl;
-	PlayerStart=true;
-	if(MainGui.GetBNewGame())
-		{
-		CamObject=((AI*)&TObject);
-		MainGui.SetBNewGame(false);
-		CalcSim=true;
-		}
-	else
-		CamObject=((AI*)PlayerObject)->GetLastAttackReObject();
-	PlayerObject=NULL;
-	*CamCor=((AI*)CamObject)->GetUCord();
-	ss1.playercord=((AI*)CamObject)->GetUCord();
-	CommonPF=&NullPF;
-	ShipKill=0;
-	AttackShip=0;
+	if(PlayerObject!=NULL&&((AI*)PlayerObject)->GetStepKill()) {
+		cout<<"You Die!!!"<<endl;
+		PlayerStart=true;
+		if(MainGui.GetBNewGame()) {
+			CamObject=((AI*)&TObject);
+			MainGui.SetBNewGame(false);
+			CalcSim=true;
+		} else
+			CamObject=((AI*)PlayerObject)->GetLastAttackReObject();
+		PlayerObject=NULL;
+		*CamCor=((AI*)CamObject)->GetUCord();
+		ss1.playercord=((AI*)CamObject)->GetUCord();
+		CommonPF=&NullPF;
+		ShipKill=0;
+		AttackShip=0;
 	}
-	
+		
 }
 
 void TexInit()
