@@ -1,17 +1,17 @@
 #ifndef UI2D_GUI
 #define UI2D_GUI
 
+#ifdef _POSIX_C_SOURCE	// shut up pyconfig.h complaints
+#undef _POSIX_C_SOURCE
+#endif
+#include <Python.h>
+
 #include <guichan.hpp>
 #include <guichan/sdl.hpp>
 #include <guichan/opengl.hpp>
 #include <guichan/opengl/openglsdlimageloader.hpp>
 #include <GL/gl.h>
 #include <sstream>
-
-#ifdef _POSIX_C_SOURCE	// shut up pyconfig.h complaints
-#undef _POSIX_C_SOURCE
-#endif
-#include <Python.h>
 
 #include "../../uni.h"
 #include "image_button.h"

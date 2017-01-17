@@ -1,8 +1,12 @@
+#include <Python.h>
+
 #include <SDL.h>
 #include <SDL_thread.h>
 #include <SDL_mixer.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+
+
 #include <string.h>
 #include <string>
 
@@ -40,8 +44,6 @@ static float ITfiz=0.02;
 #include "./res/res.h"
 #include "./res/loadworld.h"
 #include "./wor/pylevel.h"
-
-#include <Python.h>
 
 TextureList TTemp;
 UTextureList TextureDelet;

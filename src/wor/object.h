@@ -1,14 +1,14 @@
 #ifndef OBJECT
 #define OBJECT
 
-#include <iostream>
-#include <list>
-#include <SDL.h>
-
 #ifdef _POSIX_C_SOURCE	// shut up pyconfig.h complaints
 #undef _POSIX_C_SOURCE
 #endif
 #include <Python.h>
+
+#include <iostream>
+#include <list>
+#include <SDL.h>
 
 #include "../uni.h"
 #include "../gra/mathlib.h"

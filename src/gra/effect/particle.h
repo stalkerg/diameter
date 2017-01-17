@@ -1,14 +1,14 @@
 #ifndef EF_PARTICLE
 #define EF_PARTICLE
 
-#include "../sprite.h"
-#include <stdlib.h>
-#include <SDL.h>
-
 #ifdef _POSIX_C_SOURCE	// shut up pyconfig.h complaints
 #undef _POSIX_C_SOURCE
 #endif
 #include <Python.h>
+
+#include "../sprite.h"
+#include <stdlib.h>
+#include <SDL.h>
 
 struct Part
 {

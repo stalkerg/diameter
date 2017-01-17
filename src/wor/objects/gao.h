@@ -1,6 +1,11 @@
 #ifndef OBJECT_AI_GAO
 #define OBJECT_AI_GAO
 
+#ifdef _POSIX_C_SOURCE	// shut up pyconfig.h complaints
+#undef _POSIX_C_SOURCE
+#endif
+#include <Python.h>
+
 #include <GL/glu.h>
 #include "./pul.h"
 #include "./roc.h"
@@ -13,12 +18,6 @@
 #include "../../gra/effect/particle.h"
 #include "../../gra/effect/explosion.h"
 #include "../../snd/snd.h"
-
-#ifdef _POSIX_C_SOURCE	// shut up pyconfig.h complaints
-#undef _POSIX_C_SOURCE
-#endif
-#include <Python.h>
-
 
 struct WeaponSM
 {

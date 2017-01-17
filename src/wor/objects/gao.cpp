@@ -282,7 +282,7 @@ bool GaoObject::Move ()
 {
 vec2 v2, v1 = GetDoVar ()->avec[0], v3;
 float f1, f2, f3;
-bool b2, b3, b4=false;
+bool b3, b4=false;
 v2.x = GetDoVar ()->avec[0].x - PF.cord.x;
 v2.y = GetDoVar ()->avec[0].y - PF.cord.y;
 f1 = v2.length ();
@@ -291,7 +291,6 @@ ObjectList::iterator it1;
 f3 = 40;
 AI *TempAI = NULL, *TempAI2 = NULL;
 b3 = false;
-b2 = false;
 if (PF.now_power != 0)
 	{
 	short Sub4Sector = GetSublimatObjects ()->Get4Sector (GetnSector (), PF.cord.x, PF.cord.y);
@@ -434,7 +433,7 @@ if(O1->GetStepKill())
 	return true;
 vec2 v2, v1, v3;
 float f1, f2, f3;
-bool b2, b3, b4=false;
+bool b3, b4=false;
 if(GetDoVar()->abool[1])
 	v1=GetDoVar()->avec[0];
 else
@@ -447,7 +446,6 @@ ObjectList::iterator it1;
 f3 = 40;
 AI *TempAI = NULL, *TempAI2 = NULL;
 b3 = false;
-b2 = false;
 if (PF.now_power != 0)
 	{
 	short Sub4Sector =

@@ -1,9 +1,11 @@
 #ifndef FIZ
 #define FIZ
 
-#include "../gra/mathlib.h"
-#include "../uni.h"
 #include "./object.h"
+#include "../gra/mathlib.h"
+
+#include "../uni.h"
+
 #include <iostream>
 
 using namespace std;

@@ -1,10 +1,10 @@
 #ifndef LOADWORLD
 #define LOADWORLD
 
-#include "../gra/sprite.h"
-#include "../gra/model.h"
 #include "../wor/object.h"
 #include "../wor/objects/gao.h"
+#include "../gra/sprite.h"
+#include "../gra/model.h"
 #include "../uni.h"
 
 /**          Load world from xml file.
