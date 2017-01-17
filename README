@@ -1,0 +1,21 @@
+For build please:
+./configure
+make
+make install
+
+Run:
+diameter
+
+Need SDL, SDL_image >=1.2.4, SDL_mixer, guichan(sdl,opengl) >= 0.4, libpng >=1.2.8 and python >= 2.3.
+After run diameter in curent dir.
+
+Switch gun keys: 1,2,3;(3 - rocket not work)
+Left mouse  button - fire
+Right mouse button - power
+q,e - streif
+a,d - left, right rotation
+w - power max
+right and left ctrl - fire!
+
+if in config mouse="0":
+a, s and left, right for rotation.

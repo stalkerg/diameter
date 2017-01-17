@@ -1,0 +1,5 @@
+$su
+$make & make install
+
+and run:
+$diameter

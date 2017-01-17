@@ -1,0 +1,116 @@
+<world n="1">
+	<level n="0" name="test_mission1" scale="600000" script="pyscripts/test_mission1.py" >
+		<decoration>
+			<sprite name="sp001">
+				<cord x="0" y="0" z="-30"/>
+				<scale s="90"/>
+				<SetColorMaterial bool="true"/>
+				<SetBlend bool="true"/>
+				<SetBlendFunction name="GL_ONE_MINUS_SRC_ALPHA"/>
+				<SetDepthMask bool="false"/>
+			</sprite>
+			<sprite name="sp001">
+				<cord x="0" y="0" z="-12"/>
+				<scale s="90"/>
+				<SetColor r="1.0" g="1.0" b="1.0" a="0.5"/>
+				<SetColorMaterial bool="true"/>
+				<SetBlend bool="true"/>
+				<SetBlendFunction name="GL_ONE_MINUS_SRC_ALPHA"/>
+				<SetDepthMask bool="false"/>
+			</sprite>
+			<sprite name="sp012">
+				<cord x="40" y="0" z="-10"/>
+				<scale s="10"/>
+				<SetColor r="1.0" g="1.0" b="1.0" a="0.8"/>
+				<SetColorMaterial bool="true"/>
+				<SetBlend bool="true"/>
+				<SetBlendFunction name="GL_ONE"/>
+				<SetDepthMask bool="false"/>
+			</sprite>
+			<sprite name="sp012">
+				<cord x="-250" y="0" z="-10"/>
+				<rot num="90"/>
+				<scale s="10"/>
+				<SetColor r="1.0" g="1.0" b="1.0" a="0.5"/>
+				<SetColorMaterial bool="true"/>
+				<SetBlend bool="true"/>
+				<SetBlendFunction name="GL_ONE"/>
+				<SetDepthMask bool="false"/>
+			</sprite>
+		</decoration>
+		<!--include path="./data/world/test_decor1.xml"/-->
+		<objects>
+			<GaoObject>
+				<ship_name name="PlayerShip"/>
+				<ship_type name="ShipWrrior"/>
+				<model name="Ship3"/>
+				<explosion_small name="sp011"/>
+				<explosion_big name="sp012"/>
+				<camera_on/>
+				<hs>
+					<health num="20"/>
+					<max_health num="20"/>
+					<shield num="100"/>
+					<max_shield num="100"/>
+					<speed_reg_shield num="0.5"/>
+					<gun_energy num="100"/>
+					<max_gun_energy num="100"/>
+					<speed_reg_gun_energy num="0.6"/>
+				</hs>
+				<pfs>
+					<max_power num="13"/>
+					<mass num="1"/>
+					<speed_rotation num="102"/>
+					<cord x="0" y="-5"/>
+					<player/>
+				</pfs>
+				<particle num_pat="30" sprite="sp009" 
+					  x="0.8" y="0.8" sx="0" sy="0">
+					<nDirection x="1" y="1" z="0"/>
+					<cor x="1" y="1" z="-0.1"/>
+					<start_color r="1" g="0.8" b="1" a="1"/>
+					<end_color r="1" g="0" b="0" a="0"/>
+					<nspeed num="4"/>
+					<fspeed_x num="400"/>
+					<fspeed_y num="400"/>
+					<life num="0.6"/>
+				</particle>
+			</GaoObject>
+			
+			<GaoObject>
+				<ship_name name="Transport"/>
+				<ship_type name="ShipTrade"/>
+				<model name="Ship4"/>
+				<explosion_small name="sp011"/>
+				<explosion_big name="sp012"/>
+				<hs>
+					<health num="20"/>
+					<max_health num="20"/>
+					<shield num="100"/>
+					<max_shield num="100"/>
+					<speed_reg_shield num="0.5"/>
+					<gun_energy num="100"/>
+					<max_gun_energy num="100"/>
+					<speed_reg_gun_energy num="0.6"/>
+				</hs>
+				<pfs>
+					<max_power num="7"/>
+					<mass num="2"/>
+					<speed_rotation num="50"/>
+					<cord x="-248" y="-13"/>
+				</pfs>
+				<particle num_pat="30" sprite="sp009" 
+					  x="1.0" y="1.0" sx="0" sy="0.85">
+					<nDirection x="1" y="1" z="0"/>
+					<cor x="1" y="1" z="0.1"/>
+					<start_color r="1" g="0.8" b="1" a="1"/>
+					<end_color r="1" g="0" b="0" a="0"/>
+					<nspeed num="4"/>
+					<fspeed_x num="400"/>
+					<fspeed_y num="400"/>
+					<life num="0.6"/>
+				</particle>
+			</GaoObject>
+		</objects>
+	</level>
+</world>

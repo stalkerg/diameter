@@ -1,0 +1,33 @@
+<in>
+	<texture name="Cloud1" path="texture/blue_sphere.png"/>
+	<texture name="Cloud1_" path="texture/back.png"/>
+	<texture name="Cloud1__" path="texture/Brat.jpg"/>
+	<texture name="Argon" path="texture/Argon.jpg"/>
+	<texture name="TestS1" path="texture/test.png"/>
+	<texture name="NULL" path="texture/null.jpg"/>
+	<texture name="Cloud3" path="texture/Cloud2.png"/>
+	<texture name="Cloud2" path="texture/Cloud1.png"/>
+	<texture name="Cloud4" path="texture/Cloud3.png"/>
+	<texture name="Cloud5" path="texture/Cloud4.jpg"/>
+	<texture name="Nebular3" path="texture/nebular3.jpg"/>
+	<texture name="Flame" path="texture/flame.jpg"/>
+	<texture name="Flame2" path="texture/flame2.jpg"/>
+	<texture name="Part1" path="texture/p1.png"/>
+	<texture name="spaceship" path="texture/spaceshiptexture.jpg"/>
+	
+	<texture name="Ship1" path="texture/ship1/S1.jpg"/>
+	<texture name="Ship2" path="texture/ship2/S2.jpg"/>
+	<texture name="Ship3" path="texture/ship3/S3.jpg"/>
+	<texture name="Ship4" path="texture/ship4/S4.jpg"/>
+	<texture name="Liser1" path="texture/Liser1.jpg"/>
+	
+	<texture name="Rocket1" path="texture/Rockets/R01s.jpg"/>
+	<texture name="Rocket2" path="texture/Rockets/R02.jpg"/>
+	
+	<texture name="CursCenter" path="texture/gui/curs/center2.png"/>
+	<texture name="CursRing" path="texture/gui/curs/ring.png"/>
+	<texture name="CursWLiser" path="texture/gui/curs/weapons/laser.png"/>
+	<texture name="CursWPlasma" path="texture/gui/curs/weapons/plasma.png"/>
+	<texture name="CursWRocket" path="texture/gui/curs/weapons/rocket.png"/>
+	<!--<texture name="CursCenter" path="texture/Rockets/R02.jpg"/>-->
+</in>

@@ -1,0 +1,126 @@
+<model name="Ship1" types="gen">
+	<gCD x="0" y="0" z="0"/>
+	<gRT x="0" y="0" z="0"/>
+	<gSA x="1" y="1" z="1"/>
+	<lod>
+		<subm>
+			<CD x="0" y="0" z="0"/>
+			<RT x="0" y="0" z="90"/>
+			<ScaleRadius SR="0.01"/>
+			<SA x="1" y="1" z="1"/>
+			<mAM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mDM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mSM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mEM r="0.0" g="0.0" b="0.0" a="1"/>
+			
+			<file path="models/Ships/1_406.3DS"/>
+			<texture name="Ship1"/>
+			
+			<mShinM i="0"/>
+		</subm>
+	</lod>
+</model>
+
+
+<model name="Ship2" types="gen">
+	<gCD x="0" y="0" z="0"/>
+	<gRT x="0" y="0" z="0"/>
+	<gSA x="1.0" y="1.0" z="1.0"/>
+	<lod>
+		<subm>
+			<CD x="0" y="0" z="0"/>
+			<RT x="0" y="0" z="90"/>
+			<!--<ScaleRadius SR="0.011"/>-->
+			<ScaleRadius SR="1"/>
+			<SA x="1" y="1" z="1"/>
+			<file path="models/Ships/ship2/2_628.3DS"/>
+			<texture name="Ship2"/>
+			<mAM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mDM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mSM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mEM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mShinM i="0"/>
+		</subm>
+	</lod>
+</model>
+<model name="Ship3" types="gen">
+	<gCD x="0" y="0" z="0"/>
+	<gRT x="0" y="0" z="0"/>
+	<gSA x="1.0" y="1.0" z="1.0"/>
+	<lod>
+		<subm>
+			<CD x="0" y="0" z="0"/>
+			<RT x="0" y="0" z="90"/>
+			<ScaleRadius SR="0.01"/>
+			<SA x="1" y="1" z="1"/>
+			<file path="models/Ships/ship3/3_436.3DS"/>
+			<texture name="Ship3"/>
+			<mAM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mDM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mSM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mEM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mShinM i="0"/>
+		</subm>
+	</lod>
+</model>
+<model name="Ship4" types="gen">
+	<gCD x="0" y="0" z="0"/>
+	<gRT x="0" y="0" z="0"/>
+	<gSA x="1.0" y="1.0" z="1.0"/>
+	<lod>
+		<subm>
+			<CD x="0" y="0" z="0"/>
+			<RT x="0" y="0" z="90"/>
+			<ScaleRadius SR="0.013"/>
+			<SA x="1" y="1" z="1"/>
+			<file path="models/Ships/ship4/4_724.3DS"/>
+			<texture name="Ship4"/>
+			<mAM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mDM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mSM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mEM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mShinM i="0"/>
+		</subm>
+	</lod>
+</model>
+<model name="Rocket1" type="rocket">
+	<gCD x="0" y="0" z="0"/>
+	<gRT x="0" y="0" z="0"/>
+	<gSA x="1.0" y="1.0" z="1.0"/>
+	<lod>
+		<subm>
+			<CD x="-0.05" y="0.25" z="0"/>
+			<RT x="0" y="0" z="90"/>
+			<ScaleRadius SR="0.006"/>
+			<SA x="1" y="1" z="1"/>
+			<file path="models/Rockets/r01_88.3DS"/>
+			<texture name="Rocket1"/>
+			<mAM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mDM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mSM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mEM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mShinM i="0"/>
+		</subm>
+	</lod>
+</model>
+<model name="Rocket2" type="rocket">
+	<gCD x="0" y="0" z="0"/>
+	<gRT x="0" y="0" z="0"/>
+	<gSA x="1.0" y="1.0" z="1.0"/>
+	<lod>
+		<subm>
+			<CD x="0" y="0" z="0"/>
+			<RT x="0" y="0" z="90"/>
+			<ScaleRadius SR="0.006"/>
+			<SA x="1" y="1" z="1"/>
+			<file path="models/Rockets/r02_88.3DS"/>
+			<texture name="Rocket2"/>
+			<mAM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mDM r="0.8" g="0.8" b="0.8" a="1"/>
+			<mSM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mEM r="0.0" g="0.0" b="0.0" a="1"/>
+			<mShinM i="0"/>
+		</subm>
+	</lod>
+</model>
+

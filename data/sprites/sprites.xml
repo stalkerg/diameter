@@ -1,0 +1,22 @@
+
+<in>
+	<sprite name="sp001" tex="Cloud1" sx1="0" sy1="0" sx2="0" sy2="0" sca="5" />
+	<sprite name="sp002" tex="Argon" sx1="0" sy1="0" sx2="0" sy2="0" sca="1" />
+	<sprite name="sp003" tex="Cloud2" sx1="0" sy1="0" sx2="0" sy2="0" sca="3" />
+	<sprite name="sp004" tex="Flame" sx1="0" sy1="0" sx2="0" sy2="0" sca="1.2" />
+	<sprite name="sp005" tex="Cloud3" sx1="0" sy1="0" sx2="0" sy2="0" sca="1" />
+	<sprite name="sp006" tex="Cloud4" sx1="0" sy1="0" sx2="0" sy2="0" sca="3" />
+	<sprite name="sp007" tex="Flame2" sx1="0" sy1="0" sx2="0" sy2="0" sca="18" />
+	<sprite name="sp008" tex="Cloud5" sx1="0" sy1="0" sx2="0" sy2="0" sca="1" />
+	<sprite name="sp009" tex="Part1"  sx1="0" sy1="0" sx2="0" sy2="0" sca="1.5"/>
+	<sprite name="sp010" tex="Liser1" sx1="0" sy1="0" sx2="0" sy2="0" sca="1" />
+	<sprite name="sp011" tex="Part1"  sx1="0" sy1="0" sx2="0" sy2="0" sca="1.0"/>
+	<sprite name="sp012" tex="Flame" sx1="0" sy1="0" sx2="0" sy2="0" sca="10" />
+	<sprite name="sp013" tex="Part1"  sx1="0" sy1="0" sx2="0" sy2="0" sca="0.2"/>
+	
+	<sprite name="CursCenter" tex="CursCenter"  sx1="0" sy1="0" sx2="0" sy2="0" sca="64.0"/>
+	<sprite name="CursRing" tex="CursRing"  sx1="0" sy1="0" sx2="0" sy2="0" sca="64.0"/>
+	<sprite name="CursWLiser" tex="CursWLiser"  sx1="0" sy1="0" sx2="0" sy2="0" sca="64.0"/>
+	<sprite name="CursWPlasma" tex="CursWPlasma"  sx1="0" sy1="0" sx2="0" sy2="0" sca="64.0"/>
+	<sprite name="CursWRocket" tex="CursWRocket"  sx1="0" sy1="0" sx2="0" sy2="0" sca="64.0"/>
+</in>
