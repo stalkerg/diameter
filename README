@@ -1,14 +1,26 @@
-For build please:
-./configure
+**For build please:**
+cd diameter
+mkdir build
+cd build
+cmake ..
 make
 make install
 
-Run:
-diameter
+**Run game in root dir:**
+cd diameter
+./build/diameter
 
-Need SDL, SDL_image >=1.2.4, SDL_mixer, guichan(sdl,opengl) >= 0.4, libpng >=1.2.8 and python >= 2.3.
-After run diameter in curent dir.
+**Depending on:**
+CMake >= 3
+OpenGL >= 2.0
+SDL 1
+SDL_image 1
+SDL_mixer 1
+guichan(sdl,opengl) >= 0.4
+libpng >= 1.2.8
+python >= 2.7
 
+**Controls:**
 Switch gun keys: 1,2,3;(3 - rocket not work)
 Left mouse  button - fire
 Right mouse button - power
