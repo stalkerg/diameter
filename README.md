@@ -1,14 +1,17 @@
 **For build please:**
+```
 cd diameter
 mkdir build
 cd build
 cmake ..
 make
-make install
+make install```
 
 **Run game in root dir:**
+```
 cd diameter
 ./build/diameter
+```
 
 **Depending on:**
 
