@@ -62,20 +62,19 @@ Particle PartTest(30);
 PlayFizState *CommonPF,NullPF;
 vec2 **CamCor, curs_cord;
 vec3 tempVec;
-StarSystem ss1;
-Stars Starss1;
+StarSystem *star_system;
 ModelList gmlist;
 UModelList ModelDelet;
 UModelList::iterator IteratorUML;
 
 SpriteList gslist;
-char StringTemp[20],StringTemp2[100];
+char StringTemp[20], StringTemp2[100];
 
 WorldObjects *World1;
-int nWorld=0,ShipKill=0,AttackShip=0;
-Object *CamObject,*PlayerObject;
+int nWorld=0, ShipKill=0, AttackShip=0;
+Object *CamObject, *PlayerObject;
 GaoObject TObject;
-AI *CamAI,*TempAI,*AddObject=NULL,*TempAI2=NULL;
+AI *CamAI, *TempAI, *AddObject=NULL, *TempAI2=NULL;
 WeaponSM PSTemp;
 
 ObjectList::iterator object_iterator_1, object_iterator_2;
@@ -106,8 +105,12 @@ GLfloat mat_diffuse[]= { 0.2f, 0.2f, 0.2f, 1.0f };
 GLfloat mat_specular[]= { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat mat_shininess[]= { 1.0f };
 
+ObjectList *get_current_sobjects() {
+	return  World1->GetSub(nWorld)->GetSO();
+}
+
 void Render() {
-	//Fizic	
+	// Physics
 	if(Game) {
 		while(time_gone>=ITfiz) {
 			PySublimatObjects::SetPythonSublimatObjects(World1->GetSub(nWorld));
@@ -115,16 +118,17 @@ void Render() {
 				World1->GetSub(nWorld)->SetPyNextTime(SDL_GetTicks()+2000);
 				World1->GetSub(nWorld)->RunPython();
 			}
-			Colizion(World1->GetSub(nWorld),*World1->GetSub(nWorld)->GetSO());
-			for(object_iterator_1=World1->GetSub(nWorld)->GetSO()->begin();
-			    object_iterator_1!=World1->GetSub(nWorld)->GetSO()->end();
-			    ++object_iterator_1)
-				{
-				object_iterator_2=object_iterator_1;
+			Colizion(World1->GetSub(nWorld), *World1->GetSub(nWorld)->GetSO());
+
+			for(object_iterator_1 = get_current_sobjects()->begin();
+				object_iterator_1 != get_current_sobjects()->end();
+				++object_iterator_1) {
+				object_iterator_2 = object_iterator_1;
 				--object_iterator_2;
-				if(object_iterator_1->in->Calc()==1)
+				// 1 is think what this object removed from lists
+				if(object_iterator_1->in->Calc() == 1)
 					object_iterator_1=object_iterator_2;
-				}
+			}
 			time_gone-=ITfiz;
 			ticklast2=ticknow2;
 			ticknow2=SDL_GetTicks();
@@ -134,7 +138,8 @@ void Render() {
 		ticklast2=ticknow2;
 		ticknow2=SDL_GetTicks();
 	}
-	//Draw
+
+	// Draw
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
@@ -203,7 +208,7 @@ void Render() {
 			glEnable (GL_BLEND);
 			glEnable(GL_COLOR_MATERIAL);
 			glPushMatrix();
-				ss1.Draw();
+				star_system->Draw();
 			glPopMatrix();
 			glDepthMask (GL_TRUE);
 		glPopMatrix();
@@ -332,7 +337,7 @@ void Render() {
 		}
 	}
 
-	if(PlayerStart&&CalcSim) {
+	if(PlayerStart && CalcSim) {
 		cout<<"PlayerC"<<endl;
 		PlayerStart=false;
 		CalcSim=false;
@@ -342,7 +347,7 @@ void Render() {
 		WorldInit(World1);
 		((GaoObject*)PlayerObject)->WriteWeaponSM(PSTemp);
 		*CamCor=((AI*)CamObject)->GetUCord();
-		ss1.playercord=((AI*)CamObject)->GetUCord();
+		star_system->playercord=((AI*)CamObject)->GetUCord();
 		CommonPF=((AI*)PlayerObject)->GetPFS();
 		cout<<"End"<<endl;
 	}
@@ -358,7 +363,7 @@ void Render() {
 			CamObject=((AI*)PlayerObject)->GetLastAttackReObject();
 		PlayerObject=NULL;
 		*CamCor=((AI*)CamObject)->GetUCord();
-		ss1.playercord=((AI*)CamObject)->GetUCord();
+		star_system->playercord=((AI*)CamObject)->GetUCord();
 		CommonPF=&NullPF;
 		ShipKill=0;
 		AttackShip=0;
@@ -375,60 +380,60 @@ std::string temp_string = "texture/textures.xml";
 LoadTextureList(PKGDATADIR+temp_string, &TTemp, &ticknow);
 }
 
-void ResInit()
-{
-vec2 temp_vec, temp_vec2, temp_vec3, temp_vec4;
-vec3 vec3_temp;
-color4 color4_temp;
-CamCor=new vec2*;
-World1=LoadWorld("world/arena.xml",&gslist,&gmlist, &ticknow, &ITfiz, CamCor, &CamObject, &PlayerObject);
-curs_center=GetSFName("CursCenter", &gslist);
-curs_ring=GetSFName("CursRing", &gslist);
-curs_wliser=GetSFName("CursWLiser", &gslist);
-curs_wplasma=GetSFName("CursWPlasma", &gslist);
-curs_wrocket=GetSFName("CursWRocket", &gslist);
-back=GetSFName("sp001", &gslist);
+void ResInit() {
+	vec2 temp_vec, temp_vec2, temp_vec3, temp_vec4;
+	vec3 vec3_temp;
+	color4 color4_temp;
+	CamCor=new vec2*;
+	World1=LoadWorld("world/arena.xml",&gslist,&gmlist, &ticknow, &ITfiz, CamCor, &CamObject, &PlayerObject);
+	curs_center=GetSFName("CursCenter", &gslist);
+	curs_ring=GetSFName("CursRing", &gslist);
+	curs_wliser=GetSFName("CursWLiser", &gslist);
+	curs_wplasma=GetSFName("CursWPlasma", &gslist);
+	curs_wrocket=GetSFName("CursWRocket", &gslist);
+	back=GetSFName("sp001", &gslist);
 
-PSTemp.PulsGun=GetSFName("sp008", &gslist);
-PSTemp.PulsGunEx=GetSFName("sp011", &gslist);
-PSTemp.Liser=GetSFName("sp010", &gslist);
-PSTemp.LiserEx=GetSFName("sp013", &gslist);
-PSTemp.Rocket1=GetMFName("Rocket1", &gmlist);
-PSTemp.gslist=&gslist;
-PSTemp.gmlist=&gmlist;
+	PSTemp.PulsGun=GetSFName("sp008", &gslist);
+	PSTemp.PulsGunEx=GetSFName("sp011", &gslist);
+	PSTemp.Liser=GetSFName("sp010", &gslist);
+	PSTemp.LiserEx=GetSFName("sp013", &gslist);
+	PSTemp.Rocket1=GetMFName("Rocket1", &gmlist);
+	PSTemp.gslist=&gslist;
+	PSTemp.gmlist=&gmlist;
 
-PyDGUI::InitPythonDGUI(&MainGui);
-PySublimatObjects::InitPythonSublimatObjects(&PlayerStart, &CalcSim);
-PyParticle::InitPythonParticle(&gslist, &ticknow, &ITfiz);
-PyGaoObject::InitGaoObject(&gslist, &gmlist, &ticknow,
-			   &ITfiz, PSTemp, CamCor);
+	PyDGUI::InitPythonDGUI(&MainGui);
+	PySublimatObjects::InitPythonSublimatObjects(&PlayerStart, &CalcSim);
+	PyParticle::InitPythonParticle(&gslist, &ticknow, &ITfiz);
+	PyGaoObject::InitGaoObject(&gslist, &gmlist, &ticknow,
+				   &ITfiz, PSTemp, CamCor);
 
-WorldInit(World1);
-((GaoObject*)PlayerObject)->WriteWeaponSM(PSTemp);
-*CamCor=((AI*)CamObject)->GetUCord();
-ss1.playercord=((AI*)CamObject)->GetUCord();
-CommonPF=((AI*)PlayerObject)->GetPFS();
+	WorldInit(World1);
+	((GaoObject*)PlayerObject)->WriteWeaponSM(PSTemp);
+	*CamCor=((AI*)CamObject)->GetUCord();
+	star_system->playercord=((AI*)CamObject)->GetUCord();
+	CommonPF=((AI*)PlayerObject)->GetPFS();
 }
 
 
-void InitGL()
-{
-#ifdef __unix__
-#else
-typedef void (APIENTRY * WGLSWAPINTERVALEXT) ( int ) ;
-WGLSWAPINTERVALEXT wglSwapIntervalEXT =
-(WGLSWAPINTERVALEXT) wglGetProcAddress( "wglSwapIntervalEXT" ) ;
-if ( wglSwapIntervalEXT != 0 ) 
-	{
-	// Disable vertical synchronisation :
-	wglSwapIntervalEXT( 0 ) ;
-	}
-#endif
-glEnable(GL_POINT_SMOOTH);
-glEnable (GL_BLEND);
-glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-glEnable(GL_DEPTH_TEST);
-glEnable(GL_ALPHA_TEST);
+void InitGL() {
+	#ifdef __unix__
+	#else
+	typedef void (APIENTRY * WGLSWAPINTERVALEXT) ( int ) ;
+	WGLSWAPINTERVALEXT wglSwapIntervalEXT =
+	(WGLSWAPINTERVALEXT) wglGetProcAddress( "wglSwapIntervalEXT" ) ;
+	if ( wglSwapIntervalEXT != 0 )
+		{
+		// Disable vertical synchronisation :
+		wglSwapIntervalEXT( 0 ) ;
+		}
+	#endif
+	glEnable(GL_POINT_SMOOTH);
+	glEnable (GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_ALPHA_TEST);
+
+	star_system = new StarSystem;
 }
 
 #ifdef __unix__
@@ -473,11 +478,8 @@ ModelInit(PKGDATADIR+temp_string,&gmlist,&TTemp);
 temp_string = "sprites/sprites.xml";
 SpriteInit(PKGDATADIR+temp_string,&gslist,&TTemp);
 
-
-
-ResInit();
-
 InitGL();
+ResInit();
 if(option.sound)
 	InitSound(option.snd_buffer);
 
@@ -491,11 +493,10 @@ TempDTlist.Main=&TTemp;
 TempDTlist.Slave=&TextureDelet;
 TempDTlist.in_options=&option;
 ThreadMTexture = SDL_CreateThread(ManagerTexture, &TempDTlist);
-if ( ThreadMTexture == NULL ) 
-	{
+if (ThreadMTexture == NULL) {
 	fprintf(stderr, "Unable to create thread: %s\n", SDL_GetError());
 	return 0;
-	}
+}
 DueMList TempDMlist;
 TempDMlist.Main=&gmlist;
 TempDMlist.Slave=&ModelDelet;

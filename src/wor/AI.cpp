@@ -26,26 +26,21 @@ SO->GetSO()->push_front(TempUObject);
 SO->GetSeO()[s].push_front(TempUObject);
 }
 
-void AI::Kill()
-{
-ObjectList::iterator it1;
-for (it1 = SO->GetSeO ()[nSector]. begin ();it1 != SO->GetSeO ()[nSector].end ();it1++)
-	{
-	if (it1->in == this)
-		{
-		SO->GetSeO ()[nSector].erase (it1);
-		break;
+void AI::Kill() {
+	ObjectList::iterator it1;
+	for (it1 = SO->GetSeO()[nSector].begin(); it1 != SO->GetSeO()[nSector].end(); it1++) {
+		if (it1->in == this) {
+			SO->GetSeO()[nSector].erase(it1);
+			break;
 		}
 	}
-for (it1 = SO->GetSO ()->begin (); it1 != SO->GetSO ()->end (); it1++)
-	{
-	if (it1->in == this)
-		{
-		SO->GetSO ()->erase (it1);
-		break;
+	for (it1 = SO->GetSO()->begin (); it1 != SO->GetSO()->end(); it1++) {
+		if (it1->in == this) {
+			SO->GetSO()->erase(it1);
+			break;
 		}
 	}
-delete this;
+	delete this;
 }
 
 void WorldInit(WorldObjects *WIN)

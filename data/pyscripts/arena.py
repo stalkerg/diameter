@@ -6,8 +6,8 @@ if Level.GetPlayerStart():
 	Level.SetCalcSim(1)
 	Level.Pause(5000)
 else:
-        TParticle =  Particle.NewParticle(30)
-        Particle.SetSprite(TParticle, "sp009")
+	TParticle =  Particle.NewParticle(30)
+	Particle.SetSprite(TParticle, "sp009")
 	Particle.SetnDirection(TParticle, 1.0, 1.0, 0.0)
 	Particle.SetCor(TParticle, 0.0, 0.0, -0.1)
 	Particle.SetnColor(TParticle, 1.0, 0.8, 1.0, 1.0)
@@ -86,6 +86,6 @@ else:
 	
 	Player = Level.SearchPlayer()
 	if Player != 0:
-	        GaoObject.AttackObject(TempObject, Player)
+		GaoObject.AttackObject(TempObject, Player)
 	Level.AddGaoObject(TempObject)
 	Level.Pause(15000)
