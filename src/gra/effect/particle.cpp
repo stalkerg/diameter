@@ -307,24 +307,24 @@ PyObject *PyInit(PyObject *self, PyObject *args)
 	return Py_None;
 	}
 
-void InitPythonParticle(SpriteList *gslist, float *time_n, float *time_e)
-	{
+void InitPythonParticle(SpriteList *gslist, float *time_n, float *time_e) {
 	n_time = time_n;
 	e_time = time_e;
 	slist = gslist;
 	static PyMethodDef ParticleFunctionsList[] = {
-			{ "NewParticle", PyNewParticle, METH_VARARGS },
-			{ "SetSprite", PySetSprite, METH_VARARGS },
-			{ "SetnDirection", PySetnDirection, METH_VARARGS },
-			{ "SetCor", PySetCor, METH_VARARGS },
-			{ "SetnColor", PySetnColor, METH_VARARGS },
-			{ "SetkColor", PySetkColor, METH_VARARGS },
-			{ "SetSpeed", PySetSpeed, METH_VARARGS },
-			{ "SetLife", PySetLife, METH_VARARGS },
-			{ "Init", PyInit, METH_VARARGS },
-			{ NULL, NULL, 0 }
-			};
+		{ "NewParticle", PyNewParticle, METH_VARARGS, NULL },
+		{ "SetSprite", PySetSprite, METH_VARARGS, NULL },
+		{ "SetnDirection", PySetnDirection, METH_VARARGS, NULL },
+		{ "SetCor", PySetCor, METH_VARARGS, NULL },
+		{ "SetnColor", PySetnColor, METH_VARARGS, NULL },
+		{ "SetkColor", PySetkColor, METH_VARARGS, NULL },
+		{ "SetSpeed", PySetSpeed, METH_VARARGS, NULL },
+		{ "SetLife", PySetLife, METH_VARARGS, NULL },
+		{ "Init", PyInit, METH_VARARGS, NULL },
+		{ NULL, NULL, 0, NULL }
+	};
 	Py_InitModule ("Particle", ParticleFunctionsList);
-	}
+}
+
 }
 

@@ -5,127 +5,112 @@
 
 using namespace std;
 
-void PlayFizState::SetToRot(float inx, float iny, Options oin)
-{
-float temp_d;
-to_direction.x = (2.0 * inx) / oin.winW - 1;
-to_direction.y = (2.0 * iny) / oin.winH - 1;
-temp_d = to_direction.length();
-if (temp_d != 0)
-	{
-	to_rotation = acosf (to_direction.x / temp_d) * 180 / PI;
-	if (to_direction.y > 0)
-		to_rotation *= -1;
-	to_rotation += 180;
-	if (temp_d > 1)
-		{
-		temp_d = 1;
-		to_direction.normalize();
+void PlayFizState::SetToRot(float inx, float iny, Options oin) {
+	float temp_d;
+	to_direction.x = (2.0 * inx) / oin.winW - 1;
+	to_direction.y = (2.0 * iny) / oin.winH - 1;
+	temp_d = to_direction.length();
+	if (temp_d != 0) {
+		to_rotation = acosf (to_direction.x / temp_d) * 180 / PI;
+		if (to_direction.y > 0)
+			to_rotation *= -1;
+		to_rotation += 180;
+		if (temp_d > 1) {
+			temp_d = 1;
+			to_direction.normalize();
 		}
 	}
-if(send_only_cord)
-	now_power=0;
-else
-	now_power=temp_d;
+	if(send_only_cord)
+		now_power=0;
+	else
+		now_power=temp_d;
 }
 
-void PlayFizState::CalcRotation()
-{
-if (rotation > 180 && to_rotation < 90 && rotation - to_rotation > 180)
-	rotation += (*reltime) * speed_rotation;
-else
-	if (rotation > 180 && to_rotation < 90 && rotation - to_rotation < 180)
-		rotation -= (*reltime) * speed_rotation;
-	else 
-		if (rotation < 360 && to_rotation < 90 && (to_rotation + rotation) > 360)
-			rotation += (*reltime) * speed_rotation;
-		else 
-			if (fabs (to_rotation - rotation) <= 180)
-				{
-				if (to_rotation > rotation)
-					rotation += (*reltime) * speed_rotation;
-				if (to_rotation < rotation)
-					rotation -= (*reltime) * speed_rotation;
-				}
+void PlayFizState::CalcRotation() {
+	if (rotation > 180 && to_rotation < 90 && rotation - to_rotation > 180)
+		rotation += (*reltime) * speed_rotation;
+	else
+		if (rotation > 180 && to_rotation < 90 && rotation - to_rotation < 180)
+			rotation -= (*reltime) * speed_rotation;
+		else
+			if (rotation < 360 && to_rotation < 90 && (to_rotation + rotation) > 360)
+				rotation += (*reltime) * speed_rotation;
 			else
-				{
-				if (to_rotation < rotation)
-					rotation += (*reltime) * speed_rotation;
-				if (to_rotation > rotation)
-					rotation -= (*reltime) * speed_rotation;
+				if (fabs (to_rotation - rotation) <= 180) {
+					if (to_rotation > rotation)
+						rotation += (*reltime) * speed_rotation;
+					if (to_rotation < rotation)
+						rotation -= (*reltime) * speed_rotation;
+				} else {
+					if (to_rotation < rotation)
+						rotation += (*reltime) * speed_rotation;
+					if (to_rotation > rotation)
+						rotation -= (*reltime) * speed_rotation;
 				}
 
-if (rotation > 360)
-	rotation = 0;
-if (rotation < 0)
-	rotation = 360;
-direction.x = cosf ((rotation - 180) * (PI / 180));
-if (rotation == 0 || rotation == 360)
-	direction.y = 0;
-else
-	direction.y = sinf ((rotation - 180) * (PI / 180));
-direction.y *= -1;
-direction.x *= -1;
+	if (rotation > 360)
+		rotation = 0;
+	if (rotation < 0)
+		rotation = 360;
+	direction.x = cosf ((rotation - 180) * (PI / 180));
+	if (rotation == 0 || rotation == 360)
+		direction.y = 0;
+	else
+		direction.y = sinf ((rotation - 180) * (PI / 180));
+	direction.y *= -1;
+	direction.x *= -1;
 }
 
-void PlayFizState::RotLeft(void)
-{
-to_rotation += (*reltime) * speed_rotation;
-if (to_rotation > 360)
-	to_rotation = 0;
-if (to_rotation < 0)
-	to_rotation = 360;
+void PlayFizState::RotLeft(void) {
+	to_rotation += (*reltime) * speed_rotation;
+	if (to_rotation > 360)
+		to_rotation = 0;
+	if (to_rotation < 0)
+		to_rotation = 360;
 }
 
-void PlayFizState::RotRight()
-{
-to_rotation -= (*reltime) * speed_rotation;
-if (to_rotation > 360)
-	to_rotation = 0;
-if (to_rotation < 0)
-	to_rotation = 360;
+void PlayFizState::RotRight() {
+	to_rotation -= (*reltime) * speed_rotation;
+	if (to_rotation > 360)
+		to_rotation = 0;
+	if (to_rotation < 0)
+		to_rotation = 360;
 }
 
-void PlayFizState::Calc()
-{
-if(calc_rot_left)
-	RotLeft();
-if(calc_rot_right)
-	RotRight();
-CalcRotation();
+void PlayFizState::Calc() {
+	if(calc_rot_left)
+		RotLeft();
+	if(calc_rot_right)
+		RotRight();
+	CalcRotation();
 
-if(send_only_cord)
-	now_power=0;
-if(next_speed_b)
-	{
-	speed=next_speed;
-	next_speed_b=false;
-	}
-/*if (player == false)
-	{
-	//SGall ();
-	}*/
-vec2 StreifA;
-float F_Temp;
-if(streif>=0)
-	{
-	StreifA.x=direction.y;
-	StreifA.y=-direction.x;
-	F_Temp=streif;
-	}
-else
-	{
-	StreifA.y=-direction.x;
-	StreifA.x=direction.y;
-	F_Temp=-streif;
+	if(send_only_cord)
+		now_power=0;
+	if(next_speed_b)
+		{
+		speed=next_speed;
+		next_speed_b=false;
+		}
+	/*if (player == false)
+		{
+		//SGall ();
+		}*/
+	vec2 StreifA;
+	if(streif>=0)
+		{
+		StreifA.x=direction.y;
+		StreifA.y=-direction.x;
+	} else {
+		StreifA.y=-direction.x;
+		StreifA.x=direction.y;
 	}
 
-StreifA=((StreifA*streif)/mass)*(max_power/2);
-a = ((direction * now_power) / mass) * max_power;
-speed -= (a+StreifA) * (*reltime);
-speed -= (speed / (2 / mass)) * (*reltime);
-pre_cord = cord;
-cord += speed * (*reltime);
+	StreifA=((StreifA*streif)/mass)*(max_power/2);
+	a = ((direction * now_power) / mass) * max_power;
+	speed -= (a+StreifA) * (*reltime);
+	speed -= (speed / (2 / mass)) * (*reltime);
+	pre_cord = cord;
+	cord += speed * (*reltime);
 }
 
 /*void PlayFizstate::Work3_n ()
